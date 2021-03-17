@@ -1,0 +1,23 @@
+version: 2.1
+
+executors:
+  ubuntu:
+    machine:
+      image: ubuntu-2004:202010-01
+
+workflows:
+  test-timings:
+    jobs:
+      - dreamAI
+
+jobs:
+  dreamAI:
+    executor: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies to VM
+          command: pip3 install cwltool
+      - run:
+          name: Test dreamAI
+          command: cwl-runner imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.csv --use_missForest=false
