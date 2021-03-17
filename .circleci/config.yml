@@ -16,10 +16,10 @@ commands:
           command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=<<parameters.useMissForest>>
           no_output_timeout: 5h
       - run:
-          name: move artifacts to tmp
-          command: mkdir /tmp && mv ~/project/imputed_file.tsv /tmp
+          name: mv and save artifacts
+          command: mkdir artifacts && mv imputed_file.tsv artifacts/imputed_file.tsv
       - store_artifacts:
-          path: /tmp
+          path: artifacts
 
 executors:
   ubuntu-large:
