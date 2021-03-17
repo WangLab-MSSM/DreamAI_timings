@@ -2,6 +2,10 @@ version: 2.1
 
 commands:
   dreamai-with-missforest:
+    parameters:
+      useMissForest:
+        type: string
+        default: 'true'
     steps:
       - checkout
       - run:
@@ -10,6 +14,7 @@ commands:
       - run:
           name: Test dreamAI
           command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=false
+          no_output_timeout: 5h
 
 executors:
   ubuntu-large:
@@ -26,6 +31,8 @@ workflows:
     jobs:
       - dreamAI-large
       - dreamAI-medium
+      - dreamAI-large-no-missforest
+      - dreamAI-medium-no-missforest
 
 jobs:
   dreamAI-large:
@@ -36,3 +43,13 @@ jobs:
     executor: ubuntu-medium
     steps:
       - dreamai-with-missforest
+  dreamAI-large-no-missforest:
+    executor: ubuntu-large
+    steps:
+      - dreamai-with-missforest:
+          useMissForest: 'false'
+  dreamAI-medium-no-missforest:
+    executor: ubuntu-medium
+    steps:
+      - dreamai-with-missforest:
+          useMissForest: 'false'
