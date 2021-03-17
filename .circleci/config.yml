@@ -15,6 +15,9 @@ commands:
           name: Test dreamAI
           command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=<<parameters.useMissForest>>
           no_output_timeout: 5h
+      - store_artifacts:
+          path: .
+          destination: imputed_file.tsv
 
 executors:
   ubuntu-large:
@@ -29,9 +32,9 @@ executors:
 workflows:
   test-timings:
     jobs:
-      - dreamAI-large
-      - dreamAI-medium
-      - dreamAI-large-no-missforest
+#      - dreamAI-large
+#      - dreamAI-medium
+#      - dreamAI-large-no-missforest
       - dreamAI-medium-no-missforest
 
 jobs:
