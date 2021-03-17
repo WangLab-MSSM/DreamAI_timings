@@ -4,6 +4,7 @@ executors:
   ubuntu:
     machine:
       image: ubuntu-2004:202010-01
+    resource_class: large
 
 workflows:
   test-timings:
@@ -20,4 +21,4 @@ jobs:
           command: pip3 install cwltool
       - run:
           name: Test dreamAI
-          command: cwltool imputation-tool.cwl --input_f=TEST_50pfilter_6_CPTAC3_CCRCC_Whole_abundance_gene_protNorm_2_CB_clean_1105.tsv --use_missForest=false
+          command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=false
