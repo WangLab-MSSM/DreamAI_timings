@@ -13,7 +13,7 @@ commands:
           command: pip3 install cwltool
       - run:
           name: Test dreamAI
-          command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=false
+          command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=<<parameters.useMissForest>>
           no_output_timeout: 5h
 
 executors:
