@@ -13,7 +13,7 @@ commands:
           command: pip3 install cwltool
       - run:
           name: Test dreamAI
-          command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=<<parameters.useMissForest>>
+          command: cwltool imputation-tool.cwl --input_f=TEST_50pfilter_6_CPTAC3_CCRCC_Whole_abundance_gene_protNorm_2_CB_clean_1105.tsv --use_missForest=<<parameters.useMissForest>>
           no_output_timeout: 5h
       - run:
           name: mv and save artifacts
@@ -34,9 +34,9 @@ executors:
 workflows:
   test-timings:
     jobs:
-#      - dreamAI-large
-#      - dreamAI-medium
-#      - dreamAI-large-no-missforest
+      - dreamAI-large
+      - dreamAI-medium
+      - dreamAI-large-no-missforest
       - dreamAI-medium-no-missforest
 
 jobs:
