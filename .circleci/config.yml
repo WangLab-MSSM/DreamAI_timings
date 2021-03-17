@@ -1,5 +1,16 @@
 version: 2.1
 
+commands:
+  dreamai-with-missforest:
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies to VM
+          command: pip3 install cwltool
+      - run:
+          name: Test dreamAI
+          command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=false
+
 executors:
   ubuntu:
     machine:
@@ -15,10 +26,4 @@ jobs:
   dreamAI:
     executor: ubuntu
     steps:
-      - checkout
-      - run:
-          name: Install dependencies to VM
-          command: pip3 install cwltool
-      - run:
-          name: Test dreamAI
-          command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=false
+      - dreamai-with-missforest
