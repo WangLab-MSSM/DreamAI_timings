@@ -20,4 +20,4 @@ jobs:
           command: pip3 install cwltool
       - run:
           name: Test dreamAI
-          command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.csv --use_missForest=false
+          command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=false
