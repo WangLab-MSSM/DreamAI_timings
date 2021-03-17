@@ -12,18 +12,27 @@ commands:
           command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=false
 
 executors:
-  ubuntu:
+  ubuntu-large:
     machine:
       image: ubuntu-2004:202010-01
     resource_class: large
+  ubuntu-medium:
+    machine:
+      image: ubuntu-2004:202010-01
+    resource_class: medium
 
 workflows:
   test-timings:
     jobs:
-      - dreamAI
+      - dreamAI-large
+      - dreamAI-medium
 
 jobs:
-  dreamAI:
-    executor: ubuntu
+  dreamAI-large:
+    executor: ubuntu-large
+    steps:
+      - dreamai-with-missforest
+  dreamAI-medium:
+    executor: ubuntu-medium
     steps:
       - dreamai-with-missforest
