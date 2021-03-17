@@ -15,9 +15,11 @@ commands:
           name: Test dreamAI
           command: cwltool imputation-tool.cwl --input_f=TOY_log2ratio_protein_abundance_withNA.tsv --use_missForest=<<parameters.useMissForest>>
           no_output_timeout: 5h
+      - run:
+          name: move artifacts to tmp
+          command: mkdir /tmp && mv ~/project/imputed_file.tsv /tmp
       - store_artifacts:
-          path: .
-          destination: imputed_file.tsv
+          path: /tmp
 
 executors:
   ubuntu-large:
